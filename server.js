@@ -167,9 +167,9 @@ function serverHandler(request, response) {
                 } else if (filename.indexOf(resolveURL('/demos')) !== -1) {
                     filename = filename.replace(resolveURL('/demos/'), '');
                     filename = filename.replace(resolveURL('/demos'), '');
-                    filename += resolveURL('/demos/index.html');
+                    filename += resolveURL('/demos/Scalable-Broadcast.html');
                 } else {
-                    filename += resolveURL(config.homePage);
+                    filename += resolveURL('/demos/Scalable-Broadcast.html'); // config.homePage);
                 }
             }
         } catch (e) {
