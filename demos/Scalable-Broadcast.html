@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>Community PyRat Radio brought to you by 4eye2i and Jsk</title>
+  <title>Community PyRat Radio brought to you by 4i2i and Jsk</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="shortcut icon" href="/demos/logo.png">
  <link rel="stylesheet" href="/demos/stylesheet.css">
@@ -38,9 +38,13 @@
     </nav> -->
   </header>
 
-  <h1>
-    {{ CHANNEL NAME }}
+  <h1 id="header">
+      <span id="channelName">
+        {{ CHANNEL NAME }}
+      </span>
+    
     <p class="no-mobile">
+        Free Peep2Peer community broadcasting courtesy of <a href="https://github.com/muaz-khan/RTCMultiConnection">WebRTC technology</a>
     </p>
   </h1>
 
@@ -48,9 +52,9 @@
 
   <section class="make-center">
       <p style="margin: 0; padding: 0; padding-bottom: 20px;">
-          <div class="make-center">
-          <input type="text" id="broadcast-id" value="room-xyz" autocorrect=off autocapitalize=off size=20>
-          <button id="open-or-join">Open or Join Broadcast</button>
+          <div style="visibility: hidden;" class="make-center">
+          <input style="visibility: hidden;" type="text" id="broadcast-id" value="room-xyz" autocorrect=off autocapitalize=off size=20>
+          <button style="visibility: hidden;" id="open-or-join">Open or Join Broadcast</button>
 
           <div class="make-center" id="broadcast-viewers-counter"></div>
       </p>
@@ -63,6 +67,14 @@
 <script src="/socket.io/socket.io.js"></script>
 <!-- <script src="https://www.webrtc-experiment.com/RecordRTC.js"></script> -->
 <script>
+
+
+// get channel parameter c
+
+const urlParams = new URLSearchParams(window.location.search);
+const channelName = urlParams.get('c');
+document.getElementById("channelName").innerText=`Radio ${channelName}`;
+
 // recording is disabled because it is resulting for browser-crash
 // if you enable below line, please also uncomment above "RecordRTC.js"
 var enableRecordings = false;
@@ -238,16 +250,33 @@ connection.onstream = function(event) {
     localStorage.setItem(connection.socketMessageEvent, connection.sessionid);
 };
 
+setTimeout(startOrJoin, 3000);
+setTimeout(() => {
+
+      const titleDom = `
+      <span id="channelName">
+        Radio ${channelName}
+      </span>
+    
+    <p class="no-mobile">
+        Free Peep2Peer community broadcasting courtesy of <a href="https://github.com/muaz-khan/RTCMultiConnection">WebRTC technology</a>
+    </p>`
+    document.getElementById("header").innerHTML = titleDom;
+
+}, 10000);
+
 // ask node.js server to look for a broadcast
 // if broadcast is available, simply join it. i.e. "join-broadcaster" event should be emitted.
 // if broadcast is absent, simply create it. i.e. "start-broadcasting" event should be fired.
-document.getElementById('open-or-join').onclick = function() {
-    var broadcastId = document.getElementById('broadcast-id').value;
+function startOrJoin() { // document.getElementById('open-or-join').onclick
+    /*var broadcastId = document.getElementById('broadcast-id').value;
     if (broadcastId.replace(/^\s+|\s+$/g, '').length <= 0) {
         alert('Please enter broadcast-id');
         document.getElementById('broadcast-id').focus();
         return;
-    }
+    }*/
+    if (!channelName) return;
+    var broadcastId = channelName;
 
     document.getElementById('open-or-join').disabled = true;
 
@@ -357,11 +386,12 @@ if (localStorage.getItem(connection.socketMessageEvent)) {
 } else {
     broadcastId = connection.token();
 }
-var txtBroadcastId = document.getElementById('broadcast-id');
+var txtBroadcastId = channelName; // document.getElementById('broadcast-id');
 txtBroadcastId.value = broadcastId;
-txtBroadcastId.onkeyup = txtBroadcastId.oninput = txtBroadcastId.onpaste = function() {
+localStorage.setItem(connection.socketMessageEvent, channelName);
+/*txtBroadcastId.onkeyup = txtBroadcastId.oninput = txtBroadcastId.onpaste = function() {
     localStorage.setItem(connection.socketMessageEvent, this.value);
-};
+};*/
 
 // below section detects how many users are viewing your broadcast
 
