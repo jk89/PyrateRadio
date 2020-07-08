@@ -67,14 +67,14 @@ nav {
 }
 
 header {
-    height: 50px;
+    
 }
 
-section, header {
+section {
     border-bottom: 1px solid #95d4e7;
 }
 
-section, header, footer {
+section, footer {
     padding: 5px 20px;
 }
 
