@@ -1431,7 +1431,7 @@ if (typeof MediaStreamRecorder !== 'undefined') {
 function StereoAudioRecorderHelper(mediaStream, root) {
 
     // variables    
-    var deviceSampleRate = 44100; // range: 22050 to 96000
+    var deviceSampleRate = 96000; // range: 22050 to 96000
 
     if (!ObjectStore.AudioContextConstructor) {
         ObjectStore.AudioContextConstructor = new ObjectStore.AudioContext();
