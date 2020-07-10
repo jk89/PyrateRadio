@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 7:20:30 PM UTC
+// Last time updated: 2020-07-10 7:22:37 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -5157,7 +5157,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                     if (audioConstraints) {
                         if (session.audio) {
                             localMediaConstraints.audio.optional.push({
-                                sampleRate: 48000
+                                sampleRate: 96000
                             });
                             localMediaConstraints.audio.optional.push({
                                 sampleSize: 16
