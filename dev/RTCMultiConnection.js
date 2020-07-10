@@ -705,8 +705,8 @@
 
         if (connection.bandwidth.audio) {
             sdp = CodecsHandler.setOpusAttributes(sdp, {
-                maxaveragebitrate: connection.bandwidth.audio * 8 * 1024,
-                maxplaybackrate: connection.bandwidth.audio * 8 * 1024,
+                maxaveragebitrate: connection.bandwidth.audio * 8 * 1024 * 2,
+                maxplaybackrate: connection.bandwidth.audio * 8 * 1024 * 2,
                 stereo: 1,
                 maxptime: 3
             });
@@ -723,7 +723,7 @@
         audio: {
             mandatory: {},
             optional: connection.bandwidth.audio ? [{
-                bandwidth: connection.bandwidth.audio * 8 * 1024 || 128 * 8 * 1024
+                bandwidth: connection.bandwidth.audio * 8 * 1024 * 2 || 128 * 8 * 1024
             }] : []
         },
         video: {
