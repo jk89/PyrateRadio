@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 7:26:03 PM UTC
+// Last time updated: 2020-07-10 7:28:21 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -3289,11 +3289,11 @@ var RTCMultiConnection = function(roomid, forceOptions) {
             appendOpusNext += '; sprop-stereo=' + (typeof params['sprop-stereo'] != 'undefined' ? params['sprop-stereo'] : '1');
 
             if (typeof params.maxaveragebitrate != 'undefined') {
-                appendOpusNext += '; maxaveragebitrate=' + (params.maxaveragebitrate || 256 * 1024 * 8);
+                appendOpusNext += '; maxaveragebitrate=' + (params.maxaveragebitrate || 512 * 1024 * 8);
             }
 
             if (typeof params.maxplaybackrate != 'undefined') {
-                appendOpusNext += '; maxplaybackrate=' + (params.maxplaybackrate || 256 * 1024 * 8);
+                appendOpusNext += '; maxplaybackrate=' + (params.maxplaybackrate || 512 * 1024 * 8);
             }
 
             if (typeof params.cbr != 'undefined') {
@@ -4770,8 +4770,8 @@ var RTCMultiConnection = function(roomid, forceOptions) {
 
             if (connection.bandwidth.audio) {
                 sdp = CodecsHandler.setOpusAttributes(sdp, {
-                    maxaveragebitrate: 510000, // connection.bandwidth.audio * 8 * 1024,
-                    maxplaybackrate: 510000, // connection.bandwidth.audio * 8 * 1024,
+                    maxaveragebitrate: connection.bandwidth.audio * 8 * 1024,
+                    maxplaybackrate: connection.bandwidth.audio * 8 * 1024,
                     stereo: 1,
                     maxptime: 3
                 });
