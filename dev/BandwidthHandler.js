@@ -154,11 +154,11 @@ var BandwidthHandler = (function() {
         appendOpusNext += '; sprop-stereo=' + (typeof params['sprop-stereo'] != 'undefined' ? params['sprop-stereo'] : '1');
 
         if (typeof params.maxaveragebitrate != 'undefined') {
-            appendOpusNext += '; maxaveragebitrate=' + (params.maxaveragebitrate || 128 * 1024 * 8);
+            appendOpusNext += '; maxaveragebitrate=' + (params.maxaveragebitrate || 256 * 1024 * 8);
         }
 
         if (typeof params.maxplaybackrate != 'undefined') {
-            appendOpusNext += '; maxplaybackrate=' + (params.maxplaybackrate || 128 * 1024 * 8);
+            appendOpusNext += '; maxplaybackrate=' + (params.maxplaybackrate || 256 * 1024 * 8);
         }
 
         if (typeof params.cbr != 'undefined') {
