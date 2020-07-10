@@ -1092,7 +1092,7 @@
                 if (audioConstraints) {
                     if (session.audio) {
                         localMediaConstraints.audio.optional.push({
-                            sampleRate: 96000
+                            sampleRate: 48000
                         });
                         localMediaConstraints.audio.optional.push({
                             sampleSize: 16
