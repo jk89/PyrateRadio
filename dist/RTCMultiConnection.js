@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 7:13:12 PM UTC
+// Last time updated: 2020-07-10 7:20:30 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -5155,8 +5155,16 @@ var RTCMultiConnection = function(roomid, forceOptions) {
 
                     var audioConstraints = localMediaConstraints.audio;
                     if (audioConstraints) {
-                        localMediaConstraints.audio.sampleRate = session.audio ? 96000 : undefined;
-                        localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
+                        if (session.audio) {
+                            localMediaConstraints.audio.optional.push({
+                                sampleRate: 48000
+                            });
+                            localMediaConstraints.audio.optional.push({
+                                sampleSize: 16
+                            });
+                        }
+
+                        // localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
                     }
 
                     if (!stream.isScreen) {

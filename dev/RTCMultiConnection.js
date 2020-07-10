@@ -1090,8 +1090,16 @@
 
                 var audioConstraints = localMediaConstraints.audio;
                 if (audioConstraints) {
-                    localMediaConstraints.audio.sampleRate = session.audio ? 96000 : undefined;
-                    localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
+                    if (session.audio) {
+                        localMediaConstraints.audio.optional.push({
+                            sampleRate: 48000
+                        });
+                        localMediaConstraints.audio.optional.push({
+                            sampleSize: 16
+                        });
+                    }
+
+                    // localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
                 }
 
                 if (!stream.isScreen) {
