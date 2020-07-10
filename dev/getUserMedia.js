@@ -80,6 +80,8 @@ function getUserMediaHandler(options) {
         options.onGettingLocalMedia(stream, returnBack);
     }
 
+    console.log("options.localMediaConstraints", options.localMediaConstraints);
+
     if (currentUserMediaRequest.streams[idInstance]) {
         streaming(currentUserMediaRequest.streams[idInstance].stream, true);
     } else {

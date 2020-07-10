@@ -705,8 +705,8 @@
 
         if (connection.bandwidth.audio) {
             sdp = CodecsHandler.setOpusAttributes(sdp, {
-                maxaveragebitrate: connection.bandwidth.audio * 8 * 1024,
-                maxplaybackrate: connection.bandwidth.audio * 8 * 1024,
+                maxaveragebitrate: 510000, // connection.bandwidth.audio * 8 * 1024,
+                maxplaybackrate: 510000, // connection.bandwidth.audio * 8 * 1024,
                 stereo: 1,
                 maxptime: 3
             });
@@ -1070,6 +1070,13 @@
             localMediaConstraints = connection.mediaConstraints;
         }
 
+        console.log(localMediaConstraints);
+        /**
+         * 
+         *                 sampleRate: session.audio ? 96000 : undefined,
+                sampleSize: session.audio ? 16 : undefined,
+         */
+
         getUserMediaHandler({
             onGettingLocalMedia: function(stream) {
                 var videoConstraints = localMediaConstraints.video;
@@ -1079,6 +1086,12 @@
                     } else if (videoConstraints.mandatory && videoConstraints.mandatory.chromeMediaSource) {
                         stream.isScreen = true;
                     }
+                }
+
+                var audioConstraints = localMediaConstraints.audio;
+                if (audioConstraints) {
+                    localMediaConstraints.audio.sampleRate = session.audio ? 96000 : undefined;
+                    localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
                 }
 
                 if (!stream.isScreen) {
@@ -1098,8 +1111,6 @@
             localMediaConstraints: localMediaConstraints || {
                 audio: session.audio ? localMediaConstraints.audio : false,
                 video: session.video ? localMediaConstraints.video : false,
-                sampleRate: session.audio ? 96000 : undefined,
-                sampleSize: session.audio ? 16 : undefined,
             }
         });
     };

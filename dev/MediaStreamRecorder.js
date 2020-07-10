@@ -1447,7 +1447,7 @@ function StereoAudioRecorderHelper(mediaStream, root) {
     var recordingLength = 0;
     var volume;
     var audioInput;
-    var sampleRate = root.sampleRate || deviceSampleRate;
+    var sampleRate = deviceSampleRate; // root.sampleRate || 
 
     var mimeType = root.mimeType || 'audio/wav';
     var isPCM = mimeType.indexOf('audio/pcm') > -1;

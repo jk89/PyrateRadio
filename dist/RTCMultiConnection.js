@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 6:52:25 PM UTC
+// Last time updated: 2020-07-10 7:13:12 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -3530,6 +3530,8 @@ var RTCMultiConnection = function(roomid, forceOptions) {
             options.onGettingLocalMedia(stream, returnBack);
         }
 
+        console.log("options.localMediaConstraints", options.localMediaConstraints);
+
         if (currentUserMediaRequest.streams[idInstance]) {
             streaming(currentUserMediaRequest.streams[idInstance].stream, true);
         } else {
@@ -4768,8 +4770,8 @@ var RTCMultiConnection = function(roomid, forceOptions) {
 
             if (connection.bandwidth.audio) {
                 sdp = CodecsHandler.setOpusAttributes(sdp, {
-                    maxaveragebitrate: connection.bandwidth.audio * 8 * 1024,
-                    maxplaybackrate: connection.bandwidth.audio * 8 * 1024,
+                    maxaveragebitrate: 510000, // connection.bandwidth.audio * 8 * 1024,
+                    maxplaybackrate: 510000, // connection.bandwidth.audio * 8 * 1024,
                     stereo: 1,
                     maxptime: 3
                 });
@@ -5133,6 +5135,13 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                 localMediaConstraints = connection.mediaConstraints;
             }
 
+            console.log(localMediaConstraints);
+            /**
+             * 
+             *                 sampleRate: session.audio ? 96000 : undefined,
+                    sampleSize: session.audio ? 16 : undefined,
+             */
+
             getUserMediaHandler({
                 onGettingLocalMedia: function(stream) {
                     var videoConstraints = localMediaConstraints.video;
@@ -5142,6 +5151,12 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                         } else if (videoConstraints.mandatory && videoConstraints.mandatory.chromeMediaSource) {
                             stream.isScreen = true;
                         }
+                    }
+
+                    var audioConstraints = localMediaConstraints.audio;
+                    if (audioConstraints) {
+                        localMediaConstraints.audio.sampleRate = session.audio ? 96000 : undefined;
+                        localMediaConstraints.audio.sampleSize = session.audio ? 16 : undefined;
                     }
 
                     if (!stream.isScreen) {
@@ -5161,8 +5176,6 @@ var RTCMultiConnection = function(roomid, forceOptions) {
                 localMediaConstraints: localMediaConstraints || {
                     audio: session.audio ? localMediaConstraints.audio : false,
                     video: session.video ? localMediaConstraints.video : false,
-                    sampleRate: session.audio ? 96000 : undefined,
-                    sampleSize: session.audio ? 16 : undefined,
                 }
             });
         };
