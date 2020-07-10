@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 7:34:35 PM UTC
+// Last time updated: 2020-07-10 7:37:50 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -4770,8 +4770,8 @@ var RTCMultiConnection = function(roomid, forceOptions) {
 
             if (connection.bandwidth.audio) {
                 sdp = CodecsHandler.setOpusAttributes(sdp, {
-                    maxaveragebitrate: connection.bandwidth.audio * 8 * 1024 * 2,
-                    maxplaybackrate: connection.bandwidth.audio * 8 * 1024 * 2,
+                    maxaveragebitrate: connection.bandwidth.audio * 8 * 1024 * 4,
+                    maxplaybackrate: connection.bandwidth.audio * 8 * 1024 * 4,
                     stereo: 1,
                     maxptime: 3
                 });
@@ -4788,7 +4788,7 @@ var RTCMultiConnection = function(roomid, forceOptions) {
             audio: {
                 mandatory: {},
                 optional: connection.bandwidth.audio ? [{
-                    bandwidth: connection.bandwidth.audio * 8 * 1024 * 2 || 128 * 8 * 1024
+                    bandwidth: connection.bandwidth.audio * 8 * 1024 * 4 || 128 * 8 * 1024
                 }] : []
             },
             video: {
