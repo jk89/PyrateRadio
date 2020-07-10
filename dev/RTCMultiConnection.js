@@ -723,13 +723,13 @@
         audio: {
             mandatory: {},
             optional: connection.bandwidth.audio ? [{
-                bandwidth: connection.bandwidth.audio * 8 * 1024 * 4 || 128 * 8 * 1024 * 4
+                bandwidth: connection.bandwidth.audio * 8 * 1024 * 4 || 128 * 8 * 1024
             }] : []
         },
         video: {
             mandatory: {},
             optional: connection.bandwidth.video ? [{
-                bandwidth: connection.bandwidth.video * 8 * 1024 || 128 * 8 * 1024 * 4
+                bandwidth: connection.bandwidth.video * 8 * 1024 || 128 * 8 * 1024
             }, {
                 facingMode: 'user'
             }] : [{
