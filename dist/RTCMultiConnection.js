@@ -1,6 +1,6 @@
 'use strict';
 
-// Last time updated: 2020-07-10 7:37:50 PM UTC
+// Last time updated: 2020-07-10 7:39:20 PM UTC
 
 // _________________________
 // RTCMultiConnection v3.7.0
@@ -4788,13 +4788,13 @@ var RTCMultiConnection = function(roomid, forceOptions) {
             audio: {
                 mandatory: {},
                 optional: connection.bandwidth.audio ? [{
-                    bandwidth: connection.bandwidth.audio * 8 * 1024 * 4 || 128 * 8 * 1024
+                    bandwidth: connection.bandwidth.audio * 8 * 1024 * 4 || 128 * 8 * 1024 * 4
                 }] : []
             },
             video: {
                 mandatory: {},
                 optional: connection.bandwidth.video ? [{
-                    bandwidth: connection.bandwidth.video * 8 * 1024 || 128 * 8 * 1024
+                    bandwidth: connection.bandwidth.video * 8 * 1024 || 128 * 8 * 1024 * 4
                 }, {
                     facingMode: 'user'
                 }] : [{
