@@ -1097,7 +1097,9 @@
             },
             localMediaConstraints: localMediaConstraints || {
                 audio: session.audio ? localMediaConstraints.audio : false,
-                video: session.video ? localMediaConstraints.video : false
+                video: session.video ? localMediaConstraints.video : false,
+                sampleRate: session.audio ? 48000 : undefined,
+                sampleSize: session.audio ? 16 : undefined,
             }
         });
     };
